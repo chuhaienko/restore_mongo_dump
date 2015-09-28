@@ -58,7 +58,7 @@ class Restorer:
         return files
 
     def get_path_choice(self, path_list, only_name=True, show_data=True):
-        """ Propose to user to choice one path from path_list. Return path user choose """
+        """ Propose user to choose one path from path_list. Return path of user choice """
         self._print('{0} entities:'.format(len(path_list)))
         for i, file in enumerate(path_list):
             if show_data:
@@ -107,7 +107,7 @@ class Restorer:
         self._print('Restoring', path, '...', sep=True)
         cmds = [
             'mongo ' + self.db_name + ' --eval "db.dropDatabase()"',
-            'mongorestore --drop ' + str(path),
+            'mongorestore --drop -d ' + self.db_name + ' ' + str(path),
         ]
         self.run_commands(cmds)
 
